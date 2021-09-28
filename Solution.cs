@@ -9,23 +9,19 @@ namespace LeetCodeMergeKSortedListsCSharp
 
     public class Solution
     {
-        private ListNode[] _lists;
-
         public ListNode MergeKLists(ListNode[] lists)
         {
-            _lists = lists;
-
-            if (_lists.Length == 0)
+            if (lists.Length == 0)
                 return null;
 
-            ListNode head = UnqueueNodeWithMinValue();
+            ListNode head = UnqueueNodeWithMinValue(lists);
             if (head == null)
                 return null;
-            
+
             ListNode tail = head;
 
             ListNode nextNode;
-            while ((nextNode = UnqueueNodeWithMinValue()) != null)
+            while ((nextNode = UnqueueNodeWithMinValue(lists)) != null)
             {
                 tail.next = nextNode;
                 tail = tail.next;
@@ -34,27 +30,26 @@ namespace LeetCodeMergeKSortedListsCSharp
             return head;
         }
 
-        private ListNode UnqueueNodeWithMinValue()
+        private ListNode UnqueueNodeWithMinValue(ListNode[] lists)
         {
             int minVal = int.MaxValue;
             ListNode nodeWithMinValue = null;
             ListNode replacementHeadForNodeWithMinValue = null;
             int indexOfListWithMinVal = 0;
 
-            for (int i = 0; i < _lists.Length; i++)
+            for (int i = 0; i < lists.Length; i++)
             {
-                var item = _lists[i];
-                if (item!=null && item.val < minVal)
+                if (lists[i] != null && lists[i].val < minVal)
                 {
-                    nodeWithMinValue = item;
+                    nodeWithMinValue = lists[i];
                     replacementHeadForNodeWithMinValue = nodeWithMinValue.next;
                     indexOfListWithMinVal = i;
-                    minVal = item.val;
+                    minVal = lists[i].val;
                 }
             }
 
             // Replace head of list[indexOfListWithMinVal
-            _lists[indexOfListWithMinVal] = replacementHeadForNodeWithMinValue;
+            lists[indexOfListWithMinVal] = replacementHeadForNodeWithMinValue;
 
             return nodeWithMinValue;
         }
