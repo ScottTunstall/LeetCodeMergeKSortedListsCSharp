@@ -2,7 +2,7 @@
 
 My solution to the https://leetcode.com/problems/merge-k-sorted-lists/ HARD problem.
 
-This wasn't hard at all - I figured out the algorithm first time.
+This wasn't hard at all - I figured out the algorithm first time. And it worked. So I didn't code up unit tests, no point!
 
 Runtime: 452 ms, faster than 24.83% of C# online submissions for Merge k Sorted Lists.
 
